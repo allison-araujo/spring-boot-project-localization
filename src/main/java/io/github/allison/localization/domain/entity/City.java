@@ -19,12 +19,12 @@ package io.github.allison.localization.domain.entity;
 public class City {
 
     @Id
-    @Column(name = "id_cidade")
+    @Column(name = "id_city")
     private Long id;
     @Column(name = "name", length = 50)
     private String name;
     @Column(name = "qty_population")
-    private  long population;
+    private long qty_population;
 
 
 

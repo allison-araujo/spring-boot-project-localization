@@ -16,7 +16,7 @@ public class LocalizationApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception{
 		System.out.println("Inicializado..!");
-		saveCity();
+
 		listCity();
 
 	}
