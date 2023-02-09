@@ -2,6 +2,7 @@ package io.github.allison.localization;
 
 import io.github.allison.localization.domain.entity.City;
 import io.github.allison.localization.domain.repository.CityRepository;
+import io.github.allison.localization.service.CityService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,25 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LocalizationApplication implements CommandLineRunner {
 
 	@Autowired
-	private CityRepository cityRepository;
+	private CityService cityService;
 	@Override
 	public void run(String... args) throws Exception{
-		System.out.println("Inicializado..!");
+			cityService.listCityWhinPopulation();
 
-		listCity();
-
-	}
-
-	@Transactional
-	void saveCity(){
-		var city = new City(1L,"Corumba",13000L);
-		cityRepository.save(city);
-
-	}
-
-
-	void listCity(){
-		cityRepository.findAll().forEach(System.out::println);
 	}
 
 	public static void main(String[] args) {

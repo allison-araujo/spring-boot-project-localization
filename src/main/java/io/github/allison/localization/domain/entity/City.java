@@ -24,7 +24,7 @@ public class City {
     @Column(name = "name", length = 50)
     private String name;
     @Column(name = "qty_population")
-    private long qty_population;
+    private long population;
 
 
 
