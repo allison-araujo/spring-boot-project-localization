@@ -34,7 +34,7 @@ public class CityService {
     public void listCityName(){
 
         cityRepository.findByNameLike("Porto%").forEach(System.out::println);
-        //	cityRepository.findByName("Ladario").forEach(System.out::println);
+        //	cityRepository.findByName("Laadario").forEach(System.out::println);
     }
 
    public void listCityPopulation(){
