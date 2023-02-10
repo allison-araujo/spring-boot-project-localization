@@ -4,8 +4,12 @@ package io.github.allison.localization.service;
 import io.github.allison.localization.domain.entity.City;
 import io.github.allison.localization.domain.repository.CityRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 @Service
 public class CityService {
 
@@ -32,12 +36,24 @@ public class CityService {
 	}
 
     public void listCityName(){
+        Pageable pageable = PageRequest.of( 0, 3);
+        cityRepository
+                .findByNameLike("%%%%", pageable)
+                .forEach(System.out::println);
 
-        cityRepository.findByNameLike("Porto%").forEach(System.out::println);
-        //	cityRepository.findByName("Laadario").forEach(System.out::println);
     }
 
    public void listCityPopulation(){
         cityRepository.findByPopulation(1264545L).forEach(System.out::println);
     }
+
+
+    public List<City> filterDinamic(City city){
+        return cityRepository.findByPopulationLessThanAndNameLike(city.getPopulation(), city.getName());
+
+
+    }
 }
+
+
+
