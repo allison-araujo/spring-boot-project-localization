@@ -4,9 +4,7 @@ package io.github.allison.localization.service;
 import io.github.allison.localization.domain.entity.City;
 import io.github.allison.localization.domain.repository.CityRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,8 +46,16 @@ public class CityService {
     }
 
 
-    public List<City> filterDinamic(City city){
-        return cityRepository.findByPopulationLessThanAndNameLike(city.getPopulation(), city.getName());
+    public List<City> filterDinamico(City city){
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
+
+
+        Example<City> example = Example.of(city, matcher);
+
+        return cityRepository.findAll(example);
 
 
     }

@@ -16,7 +16,10 @@ public class LocalizationApplication implements CommandLineRunner {
 	private CityService cityService;
 	@Override
 	public void run(String... args) throws Exception{
-			cityService.listCityWhinPopulation();
+
+		var city = new City(null,"porto", 0);
+		cityService.filterDinamico(city).forEach(System.out::println);
+
 
 	}
 
