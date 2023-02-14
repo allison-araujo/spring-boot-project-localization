@@ -3,8 +3,10 @@ package io.github.allison.localization.service;
 
 import io.github.allison.localization.domain.entity.City;
 import io.github.allison.localization.domain.repository.CityRepository;
+import static io.github.allison.localization.domain.repository.specs.CitySpecs.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,6 +60,11 @@ public class CityService {
         return cityRepository.findAll(example);
 
 
+    }
+
+    public void listCityByNameSpec(){
+        cityRepository
+                .findAll(nameEqual("Corumba").or(populationGreaterThan(1000))).forEach(System.out::println);
     }
 }
 
