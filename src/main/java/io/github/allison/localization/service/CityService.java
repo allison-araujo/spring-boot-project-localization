@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 @Service
@@ -65,6 +66,25 @@ public class CityService {
     public void listCityByNameSpec(){
         cityRepository
                 .findAll(nameEqual("Corumba").or(populationGreaterThan(1000))).forEach(System.out::println);
+    }
+
+
+    public void listCitySpecssFilterDinamic(City filter){
+        Specification<City> specs = Specification.where((root, query, cb) -> cb.conjunction());
+
+        if(filter.getId() != null ){
+            specs = specs.and(idEqual(filter.getId()));
+        }
+        if(StringUtils.hasText(filter.getName())){
+            specs = specs.and(nameLike(filter.getName()));
+
+        }
+
+        if(filter.getPopulation() != 0){
+            specs = specs.and(populationGreaterThan((int) filter.getPopulation()));
+        }
+
+        cityRepository.findAll(specs).forEach(System.out::println);
     }
 }
 
