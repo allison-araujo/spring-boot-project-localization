@@ -62,6 +62,12 @@ public class CityService {
 
 
     }
+    public void listCityInNameSQL(){
+        cityRepository
+                .findByNameSqlNativo("Ladario")
+                .stream().map(cityProjections -> new City(cityProjections.getId(), cityProjections.getName(), 0))
+                .forEach(System.out::println);
+    }
 
     public void listCityByNameSpec(){
         cityRepository
